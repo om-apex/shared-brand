@@ -11,6 +11,8 @@ interface OmLogoWithTextProps {
   companyName: string
   tagline?: string
   className?: string
+  nameClassName?: string
+  nameStyle?: React.CSSProperties
 }
 
 const sizeMap: Record<LogoSize, { px: number; nameClass: string }> = {
@@ -29,6 +31,8 @@ export function OmLogoWithText({
   companyName,
   tagline,
   className = '',
+  nameClassName,
+  nameStyle,
 }: OmLogoWithTextProps) {
   const { px, nameClass } = sizeMap[size]
 
@@ -37,7 +41,10 @@ export function OmLogoWithText({
       <OmLogo size={px} />
       {showText && (
         <div className="flex flex-col leading-tight">
-          <span className={`font-semibold ${nameClass} text-gray-900`}>
+          <span
+            className={nameClassName || `font-semibold ${nameClass} text-gray-900`}
+            style={nameStyle}
+          >
             {companyName}
           </span>
           {showTagline && tagline && (
